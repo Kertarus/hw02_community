@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-
+{% extends "base.html" %}
 {%block title%}
   Последние обновления на сайте
 {% endblock %}  
@@ -7,7 +6,7 @@
 {%block content%}
   <div class="container py-5">     
     <h1>Дневники великих людей</h1>
-    {% for post in posts %}
+    {% for post in page_obj %}
       <ul>
         <li>
           Автор: {{ post.author.get_full_name }}
@@ -21,6 +20,7 @@
       <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
     {% endif %} 
     {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %} 
+    {% endfor %}
+    {% include 'posts/paginator.html' %} 
   </div>
 {% endblock %}
